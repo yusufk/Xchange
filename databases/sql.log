@@ -1,0 +1,190 @@
+timestamp: 2014-08-09T15:50:01.843163
+CREATE TABLE auth_user(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name CHAR(128),
+    last_name CHAR(128),
+    email CHAR(512),
+    password CHAR(512),
+    registration_key CHAR(512),
+    reset_password_key CHAR(512),
+    registration_id CHAR(512)
+);
+success!
+timestamp: 2014-08-09T15:50:01.845521
+CREATE TABLE auth_group(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    role CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-08-09T15:50:01.847925
+CREATE TABLE auth_membership(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2014-08-09T15:50:01.850379
+CREATE TABLE auth_permission(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    group_id INTEGER REFERENCES auth_group (id) ON DELETE CASCADE,
+    name CHAR(512),
+    table_name CHAR(512),
+    record_id INTEGER
+);
+success!
+timestamp: 2014-08-09T15:50:01.852601
+CREATE TABLE auth_event(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    time_stamp TIMESTAMP,
+    client_ip CHAR(512),
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    origin CHAR(512),
+    description TEXT
+);
+success!
+timestamp: 2014-08-09T15:50:01.854531
+CREATE TABLE auth_cas(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    created_on TIMESTAMP,
+    service CHAR(512),
+    ticket CHAR(512),
+    renew CHAR(1)
+);
+success!
+timestamp: 2014-08-16T20:52:52.489173
+CREATE TABLE alt_logins(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username CHAR(512),
+    oidtype CHAR(128),
+    oiduser INTEGER REFERENCES auth_user (id) ON DELETE CASCADE
+);
+success!
+timestamp: 2014-08-16T20:59:00.672136
+CREATE TABLE oid_associations(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    server_url CHAR(2047),
+    handle CHAR(255),
+    secret BLOB,
+    issued INTEGER,
+    lifetime INTEGER,
+    assoc_type CHAR(64)
+);
+success!
+timestamp: 2014-08-16T20:59:00.677038
+CREATE TABLE oid_nonces(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    server_url CHAR(2047),
+    itimestamp INTEGER,
+    salt CHAR(40)
+);
+success!
+timestamp: 2014-08-16T21:03:17.797846
+ALTER TABLE auth_user ADD username CHAR(128);
+success!
+timestamp: 2014-08-17T16:41:03.888180
+CREATE TABLE user_location(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    latitude CHAR(512),
+    longitude CHAR(512),
+    eventtime TIMESTAMP
+);
+success!
+timestamp: 2014-08-17T18:41:06.773988
+ALTER TABLE user_location ADD username INTEGER REFERENCES auth_user (id) ON DELETE CASCADE;
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2014-08-17T20:46:33.942568
+CREATE TABLE authorised(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    authorised_user INTEGER REFERENCES auth_user (id) ON DELETE CASCADE,
+    eventtime TIMESTAMP
+);
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+timestamp: 2014-08-17T20:52:21.335057
+ALTER TABLE user_location ADD user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE;
+success!
+timestamp: 2014-08-17T20:52:21.364802
+ALTER TABLE authorised ADD user_id INTEGER REFERENCES auth_user (id) ON DELETE CASCADE;
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!
+success!

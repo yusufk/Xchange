@@ -1,0 +1,6 @@
+{{extend 'layout.html'}}
+<h1>This is the default/nearby.html template</h1>
+{{near=near}}
+<ul>
+{{for nearperson in near:}}<li>{{=nearperson}}</li>{{pass}}
+</ul>
