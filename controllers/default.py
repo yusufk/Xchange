@@ -23,7 +23,8 @@ def add_position():
    position = json.loads(request.post_vars.position)
    latitude = position["latitude"]
    longitude = position["longitude"]
-   db.user_location.insert(user_id = auth.user.id,latitude=latitude,longitude=longitude)
+   if auth.user!=None:
+       db.user_location.insert(user_id = auth.user.id,latitude=latitude,longitude=longitude)
    #position = request.post_vars.position
    response.flash = T(str(position))
    return dict()
